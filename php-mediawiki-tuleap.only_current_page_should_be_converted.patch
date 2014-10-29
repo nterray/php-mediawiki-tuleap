@@ -1,0 +1,10 @@
+--- extensions/PdfBook/PdfBook.hooks.php.orig	2014-10-29 18:26:38.862524113 +0100
++++ extensions/PdfBook/PdfBook.hooks.php	2014-10-29 18:27:09.198524568 +0100
+@@ -60,6 +60,7 @@
+ 					$text = $wgParser->preprocess( $text, $title, $opt );
+ 					if ( preg_match_all( "/^\\*\\s*\\[{2}\\s*([^\\|\\]]+)\\s*.*?\\]{2}/m", $text, $links ) )
+ 						foreach ( $links[1] as $link ) $articles[] = Title::newFromText( $link );
++					$articles[] = $title;
+ 				}
+ 			}
+ 

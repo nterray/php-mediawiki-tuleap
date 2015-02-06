@@ -1,6 +1,6 @@
 Name:            php-mediawiki-tuleap
 Version:         1.20.3
-Release:         5%{?dist}
+Release:         6%{?dist}
 Summary:         A wiki engine
 
 Group:           Development/Tools
@@ -9,6 +9,11 @@ URL:             http://www.mediawiki.org
 Source0:         mediawiki-%{version}.tar.gz
 Source1:         https://extdist.wmflabs.org/dist/SyntaxHighlight_GeSHi-REL1_20-8c017a6.tar.gz
 Source2:         https://extdist.wmflabs.org/dist/PdfBook-REL1_23-17d1dfd.tar.gz
+Source3:	 https://extdist.wmflabs.org/dist/extensions/LabeledSectionTransclusion-REL1_20-634472d.tar.gz
+Source4:	 https://extdist.wmflabs.org/dist/extensions/CategoryTree-REL1_20-f5d36e1.tar.gz
+Source5:	 https://extdist.wmflabs.org/dist/extensions/Cite-REL1_20-aa635f0.tar.gz
+Source6:	 https://extdist.wmflabs.org/dist/extensions/ImageMap-REL1_20-50d05ff.tar.gz
+Source7:	 https://extdist.wmflabs.org/dist/extensions/InputBox-REL1_20-118f3c6.tar.gz
 Patch0:          php-mediawiki-tuleap.only_current_page_should_be_converted.patch
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -28,6 +33,11 @@ mediawiki integration within Tuleap's hosted projects.
 cd extensions
 %{__tar} -xzf %{_sourcedir}/SyntaxHighlight_GeSHi-REL1_20-8c017a6.tar.gz
 %{__tar} -xzf %{_sourcedir}/PdfBook-REL1_23-17d1dfd.tar.gz
+%{__tar} -xzf %{_sourcedir}/LabeledSectionTransclusion-REL1_20-634472d.tar.gz
+%{__tar} -xzf %{_sourcedir}/CategoryTree-REL1_20-f5d36e1.tar.gz
+%{__tar} -xzf %{_sourcedir}/Cite-REL1_20-aa635f0.tar.gz
+%{__tar} -xzf %{_sourcedir}/ImageMap-REL1_20-50d05ff.tar.gz
+%{__tar} -xzf %{_sourcedir}/InputBox-REL1_20-118f3c6.tar.gz
 cd %{_builddir}/mediawiki-%{version}
 
 %patch0
@@ -50,6 +60,13 @@ cd %{_builddir}/mediawiki-%{version}
 %doc docs
 
 %changelog
+* Fri Feb 06 2015 Yannis ROSSETTO <yannis.rossetto@enalean.com> - 1.20.3-6
+- Add LabeledSectionTransclusion extension
+- Add CategoryTree extension
+- Add Cite extension
+- Add ImageMap extension
+- Add InputBox extension
+
 * Wed Oct 29 2014 Manuel VACELET <manuel.vacelet@enalean.com> - 1.20.3-5
 - Repackage with separation between upstream and added extensions
 - Add patch for http://www.mediawiki.org/wiki/Extension_talk:PdfBook#Problem_in_pdfbook_if_only_current_page_should_be_converted

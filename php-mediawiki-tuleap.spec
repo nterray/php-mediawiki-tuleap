@@ -1,19 +1,18 @@
 Name:            php-mediawiki-tuleap
-Version:         1.20.3
-Release:         6%{?dist}
+Version:         1.23.9
+Release:         1%{?dist}
 Summary:         A wiki engine
 
 Group:           Development/Tools
 License:         GPLv2+
 URL:             http://www.mediawiki.org
 Source0:         mediawiki-%{version}.tar.gz
-Source1:         https://extdist.wmflabs.org/dist/SyntaxHighlight_GeSHi-REL1_20-8c017a6.tar.gz
+Source1:         https://extdist.wmflabs.org/dist/extensions/SyntaxHighlight_GeSHi-REL1_23-4959271.tar.gz
 Source2:         https://extdist.wmflabs.org/dist/PdfBook-REL1_23-17d1dfd.tar.gz
-Source3:	 https://extdist.wmflabs.org/dist/extensions/LabeledSectionTransclusion-REL1_20-634472d.tar.gz
-Source4:	 https://extdist.wmflabs.org/dist/extensions/CategoryTree-REL1_20-f5d36e1.tar.gz
-Source5:	 https://extdist.wmflabs.org/dist/extensions/Cite-REL1_20-aa635f0.tar.gz
-Source6:	 https://extdist.wmflabs.org/dist/extensions/ImageMap-REL1_20-50d05ff.tar.gz
-Source7:	 https://extdist.wmflabs.org/dist/extensions/InputBox-REL1_20-118f3c6.tar.gz
+Source3:	 https://extdist.wmflabs.org/dist/extensions/LabeledSectionTransclusion-REL1_23-98e6ab8.tar.gz
+Source4:	 https://extdist.wmflabs.org/dist/extensions/CategoryTree-REL1_23-c7333ea.tar.gz
+Source5:	 https://extdist.wmflabs.org/dist/extensions/Cite-REL1_23-2342915.tar.gz
+Source6:	 https://extdist.wmflabs.org/dist/extensions/ImageMap-REL1_23-1f17b01.tar.gz
 Patch0:          php-mediawiki-tuleap.only_current_page_should_be_converted.patch
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -31,13 +30,12 @@ mediawiki integration within Tuleap's hosted projects.
 %prep
 %setup -qn mediawiki-%{version}
 cd extensions
-%{__tar} -xzf %{_sourcedir}/SyntaxHighlight_GeSHi-REL1_20-8c017a6.tar.gz
+%{__tar} -xzf %{_sourcedir}/SyntaxHighlight_GeSHi-REL1_23-4959271.tar.gz
 %{__tar} -xzf %{_sourcedir}/PdfBook-REL1_23-17d1dfd.tar.gz
-%{__tar} -xzf %{_sourcedir}/LabeledSectionTransclusion-REL1_20-634472d.tar.gz
-%{__tar} -xzf %{_sourcedir}/CategoryTree-REL1_20-f5d36e1.tar.gz
-%{__tar} -xzf %{_sourcedir}/Cite-REL1_20-aa635f0.tar.gz
-%{__tar} -xzf %{_sourcedir}/ImageMap-REL1_20-50d05ff.tar.gz
-%{__tar} -xzf %{_sourcedir}/InputBox-REL1_20-118f3c6.tar.gz
+%{__tar} -xzf %{_sourcedir}/LabeledSectionTransclusion-REL1_23-98e6ab8.tar.gz
+%{__tar} -xzf %{_sourcedir}/CategoryTree-REL1_23-c7333ea.tar.gz
+%{__tar} -xzf %{_sourcedir}/Cite-REL1_23-2342915.tar.gz
+%{__tar} -xzf %{_sourcedir}/ImageMap-REL1_23-1f17b01.tar.gz
 cd %{_builddir}/mediawiki-%{version}
 
 %patch0
@@ -60,6 +58,9 @@ cd %{_builddir}/mediawiki-%{version}
 %doc docs
 
 %changelog
+* Tue Apr 07 2015 Manuel VACELET <manuel.vacelet@enalean.com> - 1.23.9-1
+- Bump version
+
 * Fri Feb 06 2015 Yannis ROSSETTO <yannis.rossetto@enalean.com> - 1.20.3-6
 - Add LabeledSectionTransclusion extension
 - Add CategoryTree extension

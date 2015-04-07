@@ -1,4 +1,4 @@
-Name:            php-mediawiki-tuleap
+Name:            php-mediawiki-tuleap-123
 Version:         1.23.9
 Release:         1%{?dist}
 Summary:         A wiki engine
@@ -45,18 +45,18 @@ cd %{_builddir}/mediawiki-%{version}
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
 
-%{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap
-%{__cp} -pr * $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap
-%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap/extensions/SyntaxHighlight_GeSHi/.git
-%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap/extensions/PdfBook/.git
-%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap/tests
+%{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123
+%{__cp} -pr * $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123
+%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123/extensions/SyntaxHighlight_GeSHi/.git
+%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123/extensions/PdfBook/.git
+%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123/tests
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_datadir}/mediawiki-tuleap
+%{_datadir}/mediawiki-tuleap-123
 %doc docs
 
 %changelog

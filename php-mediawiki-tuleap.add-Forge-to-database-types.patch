@@ -1,0 +1,24 @@
+From 76253ac430e8dda86de7db9f84fd4ad1290de072 Mon Sep 17 00:00:00 2001
+From: Martin Goyot <martin.goyot@enalean.com>
+Date: Wed, 8 Apr 2015 13:51:31 +0200
+Subject: [PATCH] add Forge to database types
+
+---
+ includes/db/Database.php | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/includes/db/Database.php b/includes/db/Database.php
+index 9254bb4..0bacee3 100644
+--- a/includes/db/Database.php
++++ b/includes/db/Database.php
+@@ -862,6 +862,7 @@ abstract class DatabaseBase implements IDatabase, DatabaseType {
+ 			'sqlite' => null,
+ 			'oracle' => null,
+ 			'mssql' => 'get from global',
++			'forge' => null,
+ 		);
+ 
+ 		$class = 'Database' . ucfirst( $driver );
+-- 
+1.9.1
+

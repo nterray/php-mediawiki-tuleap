@@ -1,6 +1,6 @@
 Name:            php-mediawiki-tuleap-123
 Version:         1.23.9
-Release:         2%{?dist}
+Release:         3%{?dist}
 Summary:         A wiki engine
 
 Group:           Development/Tools
@@ -15,6 +15,7 @@ Source5:	 https://extdist.wmflabs.org/dist/extensions/Cite-REL1_23-2342915.tar.g
 Source6:	 https://extdist.wmflabs.org/dist/extensions/ImageMap-REL1_23-1f17b01.tar.gz
 Patch0:          php-mediawiki-tuleap.only_current_page_should_be_converted.patch
 Patch1:          php-mediawiki-tuleap.add-Forge-to-database-types.patch
+Patch2:          pdfbook-command-injection.patch
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -40,8 +41,8 @@ cd extensions
 cd %{_builddir}/mediawiki-%{version}
 
 %patch0
-
 %patch1 -p1
+%patch2
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -61,6 +62,9 @@ cd %{_builddir}/mediawiki-%{version}
 %doc docs
 
 %changelog
+* Mon Sep 11 2017 Thomas Gerbet <thomas.gerbet@enalean.com> - 1.23.9-3
+- request #10637: OS command injection through the print as PDF feature in Mediawiki
+
 * Tue Apr 08 2015 Martin GOYOT <martin.goyot@enalean.com> - 1.23.9-2
 - Add patch that add 'forge' database type
 

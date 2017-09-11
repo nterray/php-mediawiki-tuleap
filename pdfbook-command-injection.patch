@@ -1,0 +1,26 @@
+--- extensions/PdfBook/PdfBook.hooks.php.orig	2017-09-11 11:00:03.484207441 +0200
++++ extensions/PdfBook/PdfBook.hooks.php	2017-09-11 11:05:32.142903458 +0200
+@@ -105,17 +105,17 @@
+ 				file_put_contents( $file, $html );
+
+ 				$footer = $format == 'single' ? "..." : ".1.";
+-				$toc    = $format == 'single' ? "" : " --toclevels $levels";
++				$toc    = $format == 'single' ? "" : " --toclevels ". escapeshellarg($levels);
+
+ 				// Send the file to the client via htmldoc converter
+ 				$wgOut->disable();
+ 				header( "Content-Type: application/pdf" );
+ 				header( "Content-Disposition: attachment; filename=\"$book.pdf\"" );
+-				$cmd  = "--left $left --right $right --top $top --bottom $bottom";
+-				$cmd .= " --header ... --footer $footer --headfootsize 8 --quiet --jpeg --color";
+-				$cmd .= " --bodyfont $font --fontsize $size --fontspacing $ls --linkstyle plain --linkcolor $linkcol";
+-				$cmd .= "$toc --no-title --format pdf14 --numbered $layout $width";
+-				$cmd  = "htmldoc -t pdf --charset $charset $cmd $file";
++				$cmd  = "--left ". escapeshellarg($left) ." --right ". escapeshellarg($right) ." --top ". escapeshellarg($top) ." --bottom " . escapeshellarg($bottom);
++				$cmd .= " --header ... --footer ". escapeshellarg($footer). " --headfootsize 8 --quiet --jpeg --color";
++				$cmd .= " --bodyfont ". escapeshellarg($font) ." --fontsize ". escapeshellarg($size) ." --fontspacing ". escapeshellarg($ls) ." --linkstyle plain --linkcolor ". escapeshellarg($linkcol);
++				$cmd .= "$toc --no-title --format pdf14 --numbered ". escapeshellarg($layout) ." ". escapeshellarg($width);
++				$cmd  = "htmldoc -t pdf --charset ". escapeshellarg($charset) ." $cmd ". escapeshellarg($file);
+ 				putenv( "HTMLDOC_NOCGI=1" );
+ 				passthru( $cmd );
+ 				@unlink( $file );

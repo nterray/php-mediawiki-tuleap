@@ -1,6 +1,6 @@
 Name:            php-mediawiki-tuleap-123
 Version:         1.23.9
-Release:         3%{?dist}
+Release:         4%{?dist}
 Summary:         A wiki engine
 
 Group:           Development/Tools
@@ -16,6 +16,7 @@ Source6:	 https://extdist.wmflabs.org/dist/extensions/ImageMap-REL1_23-1f17b01.t
 Patch0:          php-mediawiki-tuleap.only_current_page_should_be_converted.patch
 Patch1:          php-mediawiki-tuleap.add-Forge-to-database-types.patch
 Patch2:          pdfbook-command-injection.patch
+Patch3:          pdfbook-images-private-wiki.patch
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -43,6 +44,7 @@ cd %{_builddir}/mediawiki-%{version}
 %patch0
 %patch1 -p1
 %patch2
+%patch3
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -62,6 +64,9 @@ cd %{_builddir}/mediawiki-%{version}
 %doc docs
 
 %changelog
+* Wed Sep 20 2017 Thomas Gerbet <thomas.gerbet@enalean.com> - 1.23.9-4
+- request #10642: Images of non public Mediawiki are not exported when using the "print as pdf" feature
+
 * Mon Sep 11 2017 Thomas Gerbet <thomas.gerbet@enalean.com> - 1.23.9-3
 - request #10637: OS command injection through the print as PDF feature in Mediawiki
 

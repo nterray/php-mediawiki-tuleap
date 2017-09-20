@@ -1,0 +1,48 @@
+Index: PdfBook.php
+===================================================================
+--- extensions/PdfBook/PdfBook.php	(revision 110748)
++++ extensions/PdfBook/PdfBook.php	(working copy)
+@@ -32,7 +32,9 @@
+ );
+
+ # Whether or not an action tab is wanted for printing to PDF
+-$wgPdfBookTab = false;
++if ( !isset( $wgPdfBookTab ) ) {
++	$wgPdfBookTab = false;
++}
+
+ $wgHooks['UnknownAction'][] = 'PdfBookHooks::onUnknownAction';
+
+--- extensions/PdfBook/PdfBook.hooks.php.orig	2017-09-19 15:43:29.000000000 +0200
++++ extensions/PdfBook/PdfBook.hooks.php	2017-09-20 10:51:54.614839645 +0200
+@@ -41,5 +41,5 @@
+ 			// Select articles from members if a category or links in content if not
+-			if( $format == 'single' ) $articles = array( $title );
++			if( $format == 'single' || $format == 'html' ) $articles = array( $title );
+ 			else {
+ 				$articles = array();
+ 				if( $title->getNamespace() == NS_CATEGORY ) {
+@@ -82,7 +81,13 @@
+ 					$opt->setEditSection( false );    # remove section-edit links
+ 					$out     = $wgParser->parse( $text, $title, $opt, true, true );
+ 					$text    = $out->getText();
+-					$text    = preg_replace( "|(<img[^>]+?src=\")(/.+?>)|", "$1$wgServer$2", $text );      # make image urls absolute
++					if( $format == 'html' ) {
++						$text    = preg_replace( "|(<img[^>]+?src=\")(/.+?>)|", "$1$wgServer$2", $text );      # make image urls absolute
++					} else {
++						$pUrl    = parse_url( $wgScriptPath ) ;
++						$imgpath = str_replace( '/' , '\/', $pUrl['path'].'/'.basename($wgUploadDirectory) ) ; // the image's path
++						$text    = preg_replace( "|(<img[^>]+?src=\"$imgpath)(/.+?>)|", "<img src=\"$wgUploadDirectory$2", $text );
++					}
+ 					$text    = preg_replace( "|<div\s*class=['\"]?noprint[\"']?>.+?</div>|s", "", $text ); # non-printable areas
+ 					$text    = preg_replace( "|@{4}([^@]+?)@{4}|s", "<!--$1-->", $text );                  # HTML comments hack
+ 					$ttext   = basename( $ttext );
+@@ -118,7 +123,7 @@
+ 				$cmd  = "htmldoc -t pdf --charset ". escapeshellarg($charset) ." $cmd ". escapeshellarg($file);
+ 				putenv( "HTMLDOC_NOCGI=1" );
+ 				passthru( $cmd );
+-				@unlink( $file );
++				unlink( $file );
+ 			}
+ 			return false;
+ 		}

@@ -1,6 +1,6 @@
 Name:            php-mediawiki-tuleap
 Version:         1.20.3
-Release:         6%{?dist}
+Release:         7%{?dist}
 Summary:         A wiki engine
 
 Group:           Development/Tools
@@ -15,6 +15,7 @@ Source5:	 https://extdist.wmflabs.org/dist/extensions/Cite-REL1_20-aa635f0.tar.g
 Source6:	 https://extdist.wmflabs.org/dist/extensions/ImageMap-REL1_20-50d05ff.tar.gz
 Source7:	 https://extdist.wmflabs.org/dist/extensions/InputBox-REL1_20-118f3c6.tar.gz
 Patch0:          php-mediawiki-tuleap.only_current_page_should_be_converted.patch
+Patch1:          pdfbook-command-injection.patch
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -41,6 +42,7 @@ cd extensions
 cd %{_builddir}/mediawiki-%{version}
 
 %patch0
+%patch1
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -60,6 +62,9 @@ cd %{_builddir}/mediawiki-%{version}
 %doc docs
 
 %changelog
+* Wed Sep 20 2017 Thomas Gerbet <thomas.gerbet@enalean.com> - 1.20.3-7
+- request #10637: OS command injection through the print as PDF feature in Mediawiki
+
 * Fri Feb 06 2015 Yannis ROSSETTO <yannis.rossetto@enalean.com> - 1.20.3-6
 - Add LabeledSectionTransclusion extension
 - Add CategoryTree extension

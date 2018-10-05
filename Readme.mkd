@@ -1,0 +1,9 @@
+# Mediawiki package for Tuleap
+
+This repository hosts sources for the mediawiki used by Tuleap.
+It's Mediawiki 1.23.9 plus some extensions and patches.
+
+# Generate rpm
+
+$> make
+$> ls RPMS/noarch

@@ -1,6 +1,6 @@
 Name:            php-mediawiki-tuleap-123
 Version:         1.23.9
-Release:         5%{?dist}
+Release:         6%{?dist}
 Summary:         A wiki engine
 
 Group:           Development/Tools
@@ -21,7 +21,6 @@ mediawiki integration within Tuleap's hosted projects.
 
 %prep
 %setup -qn mediawiki-%{version}
-cd extensions
 
 cd %{_builddir}/mediawiki-%{version}
 

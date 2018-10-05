@@ -7,7 +7,6 @@ Group:           Development/Tools
 License:         GPLv2+
 URL:             http://www.mediawiki.org
 Source0:         mediawiki-%{version}.tar.gz
-Patch2:          pdfbook-command-injection.patch
 Patch3:          pdfbook-images-private-wiki.patch
 Patch4:          Bump-to-GeSHI-v1.0.9.0.patch
 
@@ -28,7 +27,6 @@ cd extensions
 
 cd %{_builddir}/mediawiki-%{version}
 
-%patch2
 %patch3
 %patch4
 

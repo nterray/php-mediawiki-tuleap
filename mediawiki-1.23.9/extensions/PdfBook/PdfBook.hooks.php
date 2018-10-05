@@ -60,6 +60,7 @@ class PdfBookHooks {
 					$text = $wgParser->preprocess( $text, $title, $opt );
 					if ( preg_match_all( "/^\\*\\s*\\[{2}\\s*([^\\|\\]]+)\\s*.*?\\]{2}/m", $text, $links ) )
 						foreach ( $links[1] as $link ) $articles[] = Title::newFromText( $link );
+					$articles[] = $title;
 				}
 			}
 

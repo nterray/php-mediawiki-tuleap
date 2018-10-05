@@ -7,7 +7,6 @@ Group:           Development/Tools
 License:         GPLv2+
 URL:             http://www.mediawiki.org
 Source0:         mediawiki-%{version}.tar.gz
-Source3:	 https://extdist.wmflabs.org/dist/extensions/LabeledSectionTransclusion-REL1_23-98e6ab8.tar.gz
 Source4:	 https://extdist.wmflabs.org/dist/extensions/CategoryTree-REL1_23-c7333ea.tar.gz
 Source5:	 https://extdist.wmflabs.org/dist/extensions/Cite-REL1_23-2342915.tar.gz
 Source6:	 https://extdist.wmflabs.org/dist/extensions/ImageMap-REL1_23-1f17b01.tar.gz
@@ -31,7 +30,6 @@ mediawiki integration within Tuleap's hosted projects.
 %prep
 %setup -qn mediawiki-%{version}
 cd extensions
-%{__tar} -xzf %{_sourcedir}/LabeledSectionTransclusion-REL1_23-98e6ab8.tar.gz
 %{__tar} -xzf %{_sourcedir}/CategoryTree-REL1_23-c7333ea.tar.gz
 %{__tar} -xzf %{_sourcedir}/Cite-REL1_23-2342915.tar.gz
 %{__tar} -xzf %{_sourcedir}/ImageMap-REL1_23-1f17b01.tar.gz

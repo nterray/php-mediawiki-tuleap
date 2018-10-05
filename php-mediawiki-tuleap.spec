@@ -7,7 +7,7 @@ Group:           Development/Tools
 License:         GPLv2+
 URL:             http://www.mediawiki.org
 Source0:         mediawiki-%{version}.tar.gz
-Source1:         https://extdist.wmflabs.org/dist/extensions/SyntaxHighlight_GeSHi-REL1_23-4959271.tar.gz
+
 Source2:         https://extdist.wmflabs.org/dist/PdfBook-REL1_23-17d1dfd.tar.gz
 Source3:	 https://extdist.wmflabs.org/dist/extensions/LabeledSectionTransclusion-REL1_23-98e6ab8.tar.gz
 Source4:	 https://extdist.wmflabs.org/dist/extensions/CategoryTree-REL1_23-c7333ea.tar.gz
@@ -33,7 +33,6 @@ mediawiki integration within Tuleap's hosted projects.
 %prep
 %setup -qn mediawiki-%{version}
 cd extensions
-%{__tar} -xzf %{_sourcedir}/SyntaxHighlight_GeSHi-REL1_23-4959271.tar.gz
 %{__tar} -xzf %{_sourcedir}/PdfBook-REL1_23-17d1dfd.tar.gz
 %{__tar} -xzf %{_sourcedir}/LabeledSectionTransclusion-REL1_23-98e6ab8.tar.gz
 %{__tar} -xzf %{_sourcedir}/CategoryTree-REL1_23-c7333ea.tar.gz
@@ -52,7 +51,6 @@ cd %{_builddir}/mediawiki-%{version}
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123
 %{__cp} -pr * $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123
-%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123/extensions/SyntaxHighlight_GeSHi/.git
 %{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123/extensions/PdfBook/.git
 %{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mediawiki-tuleap-123/tests
 

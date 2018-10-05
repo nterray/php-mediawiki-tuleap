@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Check compatibility') {
             steps {
-                sh 'phpcs --standard=PHPCompatibility  --runtime-set testVersion 7.2 --report-checkstyle=checkstyle.xml --extensions=php mediawiki-1.23.9 || true'
+                sh 'phpcs -d memory_limit=-1 --standard=PHPCompatibility  --runtime-set testVersion 7.2 --report-checkstyle=checkstyle.xml --extensions=php mediawiki-1.23.9 || true'
             }
         }
     }

@@ -33,7 +33,9 @@ $wgExtensionCredits['parserhook'][] = array(
 );
 
 # Whether or not an action tab is wanted for printing to PDF
-$wgPdfBookTab = false;
+if ( !isset( $wgPdfBookTab ) ) {
+	$wgPdfBookTab = false;
+}
 
 $wgHooks['UnknownAction'][] = 'PdfBookHooks::onUnknownAction';
 

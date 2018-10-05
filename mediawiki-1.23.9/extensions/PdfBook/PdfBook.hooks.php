@@ -39,7 +39,7 @@ class PdfBookHooks {
 			if( !is_array( $exclude ) ) $exclude = split( '\\s*,\\s*', $exclude );
  
 			// Select articles from members if a category or links in content if not
-			if( $format == 'single' ) $articles = array( $title );
+			if( $format == 'single' || $format == 'html' ) $articles = array( $title );
 			else {
 				$articles = array();
 				if( $title->getNamespace() == NS_CATEGORY ) {
@@ -82,7 +82,13 @@ class PdfBookHooks {
 					$opt->setEditSection( false );    # remove section-edit links
 					$out     = $wgParser->parse( $text, $title, $opt, true, true );
 					$text    = $out->getText();
-					$text    = preg_replace( "|(<img[^>]+?src=\")(/.+?>)|", "$1$wgServer$2", $text );      # make image urls absolute
+					if( $format == 'html' ) {
+						$text    = preg_replace( "|(<img[^>]+?src=\")(/.+?>)|", "$1$wgServer$2", $text );      # make image urls absolute
+					} else {
+						$pUrl    = parse_url( $wgScriptPath ) ;
+						$imgpath = str_replace( '/' , '\/', $pUrl['path'].'/'.basename($wgUploadDirectory) ) ; // the image's path
+						$text    = preg_replace( "|(<img[^>]+?src=\"$imgpath)(/.+?>)|", "<img src=\"$wgUploadDirectory$2", $text );
+					}
 					$text    = preg_replace( "|<div\s*class=['\"]?noprint[\"']?>.+?</div>|s", "", $text ); # non-printable areas
 					$text    = preg_replace( "|@{4}([^@]+?)@{4}|s", "<!--$1-->", $text );                  # HTML comments hack
 					$ttext   = basename( $ttext );
@@ -118,7 +124,7 @@ class PdfBookHooks {
 				$cmd  = "htmldoc -t pdf --charset ". escapeshellarg($charset) ." $cmd ". escapeshellarg($file);
 				putenv( "HTMLDOC_NOCGI=1" );
 				passthru( $cmd );
-				@unlink( $file );
+				unlink( $file );
 			}
 			return false;
 		}

@@ -7,7 +7,7 @@ Group:           Development/Tools
 License:         GPLv2+
 URL:             http://www.mediawiki.org
 Source0:         mediawiki-%{version}.tar.gz
-Source5:	 https://extdist.wmflabs.org/dist/extensions/Cite-REL1_23-2342915.tar.gz
+
 Source6:	 https://extdist.wmflabs.org/dist/extensions/ImageMap-REL1_23-1f17b01.tar.gz
 Patch0:          php-mediawiki-tuleap.only_current_page_should_be_converted.patch
 Patch1:          php-mediawiki-tuleap.add-Forge-to-database-types.patch
@@ -29,7 +29,7 @@ mediawiki integration within Tuleap's hosted projects.
 %prep
 %setup -qn mediawiki-%{version}
 cd extensions
-%{__tar} -xzf %{_sourcedir}/Cite-REL1_23-2342915.tar.gz
+
 %{__tar} -xzf %{_sourcedir}/ImageMap-REL1_23-1f17b01.tar.gz
 cd %{_builddir}/mediawiki-%{version}
 

@@ -7,7 +7,9 @@ pipeline {
 
     stages {
         stage('Fetch sources') {
-            checkout scm
+            steps {
+                checkout scm
+            }
         }
         stage('Check compatibility') {
             steps {

@@ -78,7 +78,14 @@ class SyntaxHighlight_GeSHi {
 		}
 		// Format
 		$out = $geshi->parse_code();
-		if ( $geshi->error == GESHI_ERROR_NO_SUCH_LANG ) {
+		$error_code_no_such_lang = '(code ' . GESHI_ERROR_NO_SUCH_LANG . ')<br />';
+		if ($geshi->error() !== false &&
+            substr_compare(
+                $geshi->error(),
+                $error_code_no_such_lang,
+                strlen($geshi->error()) - strlen($error_code_no_such_lang),
+                strlen($error_code_no_such_lang)) === 0
+        ) {
 			// Common error :D
 			$error = self::formatLanguageError( $text );
 			wfProfileOut( __METHOD__ );
@@ -374,11 +381,10 @@ class SyntaxHighlight_GeSHi {
 		$geshi->set_code_style( 'font-family: monospace, monospace;',
 			/** preserve defaults */ true );
 
-		$lang = $geshi->language;
 		$css = array();
 		$css[] = '<style type="text/css">/*<![CDATA[*/';
-		$css[] = ".source-$lang {line-height: normal;}";
-		$css[] = ".source-$lang li, .source-$lang pre {";
+		$css[] = ".mw-geshi div {line-height: normal;}";
+		$css[] = ".mw-geshi div li, .mw-geshi div pre {";
 		$css[] = "\tline-height: normal; border: 0px none white;";
 		$css[] = "}";
 		$css[] = $geshi->get_stylesheet( false );

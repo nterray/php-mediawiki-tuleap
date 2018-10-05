@@ -7,7 +7,6 @@ Group:           Development/Tools
 License:         GPLv2+
 URL:             http://www.mediawiki.org
 Source0:         mediawiki-%{version}.tar.gz
-Patch4:          Bump-to-GeSHI-v1.0.9.0.patch
 
 BuildRoot:       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -25,9 +24,6 @@ mediawiki integration within Tuleap's hosted projects.
 cd extensions
 
 cd %{_builddir}/mediawiki-%{version}
-
-
-%patch4
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT

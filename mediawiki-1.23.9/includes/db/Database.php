@@ -862,6 +862,7 @@ abstract class DatabaseBase implements IDatabase, DatabaseType {
 			'sqlite' => null,
 			'oracle' => null,
 			'mssql' => 'get from global',
+			'forge' => null,
 		);
 
 		$class = 'Database' . ucfirst( $driver );
